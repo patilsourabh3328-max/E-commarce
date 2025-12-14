@@ -1,57 +1,55 @@
 package com.Ecommerce.testcases;
 
 import java.time.Duration;
-
+import org.apache.logging.log4j.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 import com.Ecommarce.Utilities.ReadConfig;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 
 public class BaseClass {
 
-	ReadConfig readconfig=new ReadConfig();	
-	
-	String url=readconfig.getbaseUrl();		
-	String browser=readconfig.getbrowser();
+    public static WebDriver driver;
+    public static Logger logger;
 
-	public static WebDriver driver;
-	@BeforeClass
-	public void setup()
-	{
+    ReadConfig readconfig;
+    String baseUrl;
+    String browser;
 
-		//launch browser
-		switch(browser.toLowerCase())
-		{
-		case "chrome":
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-			break;
+    @BeforeClass
+    public void setup() {
 
-		case "msedge":
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-			break;
+        readconfig = new ReadConfig();     // ✅ safe
+        baseUrl = readconfig.getbaseUrl();
+        browser = readconfig.getbrowser();
 
-		case "firefox":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-			break;
-		default:
-			driver = null;
-			break;
+        switch (browser.toLowerCase()) {
+        case "chrome":
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            break;
+        case "msedge":
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+            break;
+        case "firefox":
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+            break;
+        default:
+            throw new RuntimeException("Invalid browser in config file");
+        }
 
-		}
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        logger = LogManager.getLogger("com.Ecommarce");
+    }
 
-		//implicit wait of 10 secs
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-		
-	}
-	
+    @AfterClass
+    public void teardown() {
+        driver.quit();
+    }
 }
