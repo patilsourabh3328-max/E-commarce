@@ -69,25 +69,44 @@ public class ExtentListenerClass implements ITestListener{
 
 	// When Test case get failed, this method is called.		
 
-	public void onTestFailure(ITestResult Result) 					
-	{		
-		System.out.println("Name of test method failed:" + Result.getName() );  		
-		test = reports.createTest(Result.getName());//create entry in html report
-		test.log(Status.FAIL, MarkupHelper.createLabel("Name of the failed test case is: " + Result.getName() ,ExtentColor.RED));
-	
-	String screenShotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + Result.getName() + ".png";
-	
-	File screenShotFile = new File(screenShotPath);
-	
-	if(screenShotFile.exists())
-	{
-		test.fail("Captured Screenshot is below:" + test.addScreenCaptureFromPath(screenShotPath));
-		
+	@Override
+	public void onTestFailure(ITestResult result) {
+
+	    System.out.println("Name of test method failed: " + result.getName());
+
+	    // Create test entry in Extent report
+	    test = reports.createTest(result.getName());
+	    test.log(Status.FAIL, MarkupHelper.createLabel("Test Case Failed: " + result.getName(), ExtentColor.RED));
+
+	    // Timestamp for unique file names
+	    String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+	    // Screenshot folder path
+	    String screenshotPath = System.getProperty("user.dir") + "\\Screenshots\\" + result.getName() + "_" + timestamp + ".png";
+
+	    try {
+	        // Capture Screenshot
+	        TakesScreenshot ts = (TakesScreenshot) BaseClass.driver;   // <-- driver reference
+	        File src = ts.getScreenshotAs(OutputType.FILE);
+	        File dest = new File(screenshotPath);
+
+	        // Create folder automatically
+	        dest.getParentFile().mkdirs();
+
+	        FileUtils.copyFile(src, dest);
+
+	        // Attach screenshot in report
+	        test.fail("Screenshot of failure: ").addScreenCaptureFromPath(screenshotPath);
+
+	    } catch (Exception e) {
+	        System.out.println("Exception while taking screenshot: " + e.getMessage());
+	    }
 	}
+
 	
 	//	test.addScreenCaptureFromPath(null)
 		
-	}		
+			
 
 	// When Test case get Skipped, this method is called.
 
