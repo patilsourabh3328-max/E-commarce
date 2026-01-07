@@ -1,7 +1,13 @@
 package com.Ecommerce.testcases;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -46,10 +52,29 @@ public class BaseClass {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         logger = LogManager.getLogger("com.Ecommarce");
+        
+        driver.get(baseUrl);
+		logger.info("url open");
     }
 
     @AfterClass
     public void teardown() {
         driver.quit();
     }
+    
+    public void captureScreenShot(WebDriver driver,String testName) throws IOException{
+    	
+    	//step1: convert webdriver object to TakesScreenshot interface
+    			TakesScreenshot screenshot = ((TakesScreenshot)driver);
+    			
+    			//step2: call getScreenshotAs method to create image file
+    			
+    			File src = screenshot.getScreenshotAs(OutputType.FILE);
+    			
+    			File dest = new File(System.getProperty("user.dir") + "//Screenshots//" + testName + ".png");
+    		
+    			//step3: copy image file to destination
+    			FileUtils.copyFile(src, dest);
+    }
+    
 }
