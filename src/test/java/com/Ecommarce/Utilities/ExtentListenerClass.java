@@ -20,131 +20,91 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+public class ExtentListenerClass implements ITestListener {
 
-public class ExtentListenerClass implements ITestListener{
+    ExtentSparkReporter htmlReporter;
+    ExtentReports reports;
+    ThreadLocal<ExtentTest> test = new ThreadLocal<>(); // Use ThreadLocal for parallel execution
 
-	ExtentSparkReporter  htmlReporter;
-	ExtentReports reports;
-	ExtentTest test;
-	
-	public void configureReport()
-	{
-		ReadConfig readConfig = new ReadConfig();
-		String timestamp = new SimpleDateFormat("yyyy.mm.dd.hh.mm.ss").format(new Date());
-		String reportName = "MyStoreTestReport-" + timestamp + ".html";
-		htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//Reports//" + reportName);
-		reports = new ExtentReports();
-		reports.attachReporter(htmlReporter);
-		
-		//add system information/environment info to reports
-		reports.setSystemInfo("Machine:", "testpc1");
-		reports.setSystemInfo("OS", "windows 11");
-		reports.setSystemInfo("browser:", readConfig.getbrowser());
-		reports.setSystemInfo("user name:", "Sourabh");
-		
-		//configuration to change look and feel of report
-		htmlReporter.config().setDocumentTitle("Extent Listener Report Demo");
-		htmlReporter.config().setReportName("Ecommarce");
-		htmlReporter.config().setTheme(Theme.DARK);
-		
-		
-	}
+    public void configureReport() {
+        ReadConfig readConfig = new ReadConfig();
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String reportName = "MyStoreTestReport-" + timestamp + ".html";
+        htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/Reports/" + reportName);
+        reports = new ExtentReports();
+        reports.attachReporter(htmlReporter);
 
-	//OnStart method is called when any Test starts.
-	public void onStart(ITestContext Result)					
-	{		
-		configureReport();
-		System.out.println("On Start method invoked....");  		
-	}	
+        // System info
+        reports.setSystemInfo("Machine", "testpc1");
+        reports.setSystemInfo("OS", "Windows 11");
+        reports.setSystemInfo("Browser", readConfig.getbrowser());
+        reports.setSystemInfo("User Name", "Sourabh");
 
-	//onFinish method is called after all Tests are executed
-	public void onFinish(ITestContext Result) 					
-	{		
-		System.out.println("On Finished method invoked....");  	
-		reports.flush();//it is mandatory to call flush method to ensure information is written to the started reporter.
+        // Report look & feel
+        htmlReporter.config().setDocumentTitle("Extent Listener Report Demo");
+        htmlReporter.config().setReportName("Ecommerce Test Report");
+        htmlReporter.config().setTheme(Theme.DARK);
+    }
 
-	}		
+    @Override
+    public void onStart(ITestContext context) {
+        configureReport();
+        System.out.println("On Start method invoked...");
+    }
 
+    @Override
+    public void onFinish(ITestContext context) {
+        System.out.println("On Finish method invoked...");
+        reports.flush();
+    }
 
+    @Override
+    public void onTestStart(ITestResult result) {
+        System.out.println("Test Started: " + result.getName());
+        ExtentTest extentTest = reports.createTest(result.getName());
+        test.set(extentTest); // Store in ThreadLocal
+    }
 
-	// When Test case get failed, this method is called.		
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        System.out.println("Test Passed: " + result.getName());
+        test.get().log(Status.PASS, MarkupHelper.createLabel("Test Passed: " + result.getName(), ExtentColor.GREEN));
+    }
 
-	@Override
-	public void onTestFailure(ITestResult result) {
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println("Test Failed: " + result.getName());
+        test.get().log(Status.FAIL, MarkupHelper.createLabel("Test Failed: " + result.getName(), ExtentColor.RED));
+        test.get().fail(result.getThrowable());
 
-	    System.out.println("Name of test method failed: " + result.getName());
+        // Capture screenshot
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String screenshotPath = System.getProperty("user.dir") + "/Screenshots/" + result.getName() + "_" + timestamp + ".png";
 
-	    // Create test entry in Extent report
-	    test = reports.createTest(result.getName());
-	    test.log(Status.FAIL, MarkupHelper.createLabel("Test Case Failed: " + result.getName(), ExtentColor.RED));
+        try {
+            TakesScreenshot ts = (TakesScreenshot) BaseClass.driver;
+            File src = ts.getScreenshotAs(OutputType.FILE);
+            File dest = new File(screenshotPath);
+            dest.getParentFile().mkdirs();
+            FileUtils.copyFile(src, dest);
 
-	    // Timestamp for unique file names
-	    String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            // Attach screenshot to the test
+            test.get().fail("Screenshot of failure", com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 
-	    // Screenshot folder path
-	    String screenshotPath = System.getProperty("user.dir") + "\\Screenshots\\" + result.getName() + "_" + timestamp + ".png";
+        } catch (Exception e) {
+            System.out.println("Exception while taking screenshot: " + e.getMessage());
+        }
+    }
 
-	    try {
-	        // Capture Screenshot
-	        TakesScreenshot ts = (TakesScreenshot) BaseClass.driver;   // <-- driver reference
-	        File src = ts.getScreenshotAs(OutputType.FILE);
-	        File dest = new File(screenshotPath);
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        System.out.println("Test Skipped: " + result.getName());
+        test.get().log(Status.SKIP, MarkupHelper.createLabel("Test Skipped: " + result.getName(), ExtentColor.YELLOW));
+        test.get().skip(result.getThrowable());
+    }
 
-	        // Create folder automatically
-	        dest.getParentFile().mkdirs();
-
-	        FileUtils.copyFile(src, dest);
-
-	        // Attach screenshot in report
-	        test.fail("Screenshot of failure: ").addScreenCaptureFromPath(screenshotPath);
-
-	    } catch (Exception e) {
-	        System.out.println("Exception while taking screenshot: " + e.getMessage());
-	    }
-	}
-
-	
-	//	test.addScreenCaptureFromPath(null)
-		
-			
-
-	// When Test case get Skipped, this method is called.
-
-
-	// When Test case get Skipped, this method is called.		
-
-	public void onTestSkipped(ITestResult Result)					
-	{		
-		System.out.println("Name of test method skipped:" + Result.getName() );  		
-
-		test = reports.createTest(Result.getName());
-		test.log(Status.SKIP, MarkupHelper.createLabel("Name of the skip test case is: " + Result.getName() ,ExtentColor.YELLOW));
-	}			
-
-	// When Test case get Started, this method is called.		
-
-	public void onTestStart(ITestResult Result)					
-	{		
-		System.out.println("Name of test method started:" + Result.getName() );  		
-
-	}		
-
-	// When Test case get passed, this method is called.		
-
-	public void onTestSuccess(ITestResult Result)					
-	{		
-		System.out.println("Name of test method sucessfully executed:" + Result.getName() );  		
-
-		test = reports.createTest(Result.getName());
-		test.log(Status.PASS, MarkupHelper.createLabel("Name of the passed test case is: " + Result.getName() ,ExtentColor.GREEN));
-	}		
-
-
-	public void onTestFailedButWithinSuccessPercentage(ITestResult Result)					
-	{		
-
-	}		
-
-
-	
+    @Override
+    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+        // Not used
+    }
 }

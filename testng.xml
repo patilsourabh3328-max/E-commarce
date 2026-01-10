@@ -6,7 +6,7 @@
 </listeners>
   <test thread-count="5" name="Test">
     <classes>
-      <class name="com.Ecommerce.testcases.TC_VerifyLoginPage"/>
+      <class name="com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

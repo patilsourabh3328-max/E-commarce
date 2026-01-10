@@ -1,58 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="2" passed="1" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-01-07T08:59:52 IST" name="Suite" finished-at="2026-01-07T09:00:17 IST" duration-ms="24848">
+  <suite started-at="2026-01-10T14:34:03 IST" name="Suite" finished-at="2026-01-10T14:34:21 IST" duration-ms="18017">
     <groups>
     </groups>
-    <test started-at="2026-01-07T08:59:52 IST" name="Test" finished-at="2026-01-07T09:00:17 IST" duration-ms="24848">
-      <class name="com.Ecommerce.testcases.TC_VerifyLoginPage">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPage@662ac478]" started-at="2026-01-07T08:59:52 IST" name="setup" finished-at="2026-01-07T09:00:00 IST" duration-ms="8118" status="PASS">
+    <test started-at="2026-01-10T14:34:03 IST" name="Test" finished-at="2026-01-10T14:34:21 IST" duration-ms="18017">
+      <class name="com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven@223aa2f7]" started-at="2026-01-10T14:34:03 IST" name="setup" finished-at="2026-01-10T14:34:08 IST" duration-ms="4990" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Verifylogin()[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPage@662ac478]" started-at="2026-01-07T09:00:00 IST" name="Verifylogin" finished-at="2026-01-07T09:00:16 IST" duration-ms="15976" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchElementException">
+        <test-method signature="Verifylogin(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven@223aa2f7]" started-at="2026-01-10T14:34:09 IST" name="Verifylogin" data-provider="LoginData" finished-at="2026-01-10T14:34:16 IST" duration-ms="7253" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[patilsourabh3328@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[sourabh@1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[sourabh]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Verifylogin -->
+        <test-method signature="Verifylogin(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven@223aa2f7]" started-at="2026-01-10T14:34:16 IST" name="Verifylogin" data-provider="LoginData" finished-at="2026-01-10T14:34:21 IST" duration-ms="4813" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[patilsourabh2291996@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[7276950096s]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[SecondAccoun]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//*[text()='Login1111111']"}
-  (Session info: chrome=143.0.7499.170)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.23.0', revision: '4df0a231af'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.9'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [8b7a8100a663069082bb89f4bb77277e, findElement {value=//*[text()='Login1111111'], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.169 (164b20aab62..., userDataDir: C:\Users\HP\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62708}, goog:processID: 16740, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62708/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 8b7a8100a663069082bb89f4bb77277e]]>
+              <![CDATA[expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//*[text()='Login1111111']"}
-  (Session info: chrome=143.0.7499.170)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.23.0', revision: '4df0a231af'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.9'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [8b7a8100a663069082bb89f4bb77277e, findElement {value=//*[text()='Login1111111'], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.169 (164b20aab62..., userDataDir: C:\Users\HP\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62708}, goog:processID: 16740, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62708/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 8b7a8100a663069082bb89f4bb77277e
-at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:527)
-at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:357)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:351)
-at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
-at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy29.click(Unknown Source)
-at com.Ecommarce.PageObject.LoginPage.ClickOnloginButton(LoginPage.java:45)
-at com.Ecommerce.testcases.TC_VerifyLoginPage.Verifylogin(TC_VerifyLoginPage.java:30)
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at org.testng.Assert.assertTrue(Assert.java:67)
+at com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven.Verifylogin(TC_VerifyLoginPageDataDriven.java:50)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -81,15 +89,15 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Verifylogin -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPage@662ac478]" started-at="2026-01-07T09:00:16 IST" name="teardown" finished-at="2026-01-07T09:00:17 IST" duration-ms="312" status="PASS">
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven@223aa2f7]" started-at="2026-01-10T14:34:21 IST" name="teardown" finished-at="2026-01-10T14:34:21 IST" duration-ms="180" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-      </class> <!-- com.Ecommerce.testcases.TC_VerifyLoginPage -->
+      </class> <!-- com.Ecommerce.testcases.TC_VerifyLoginPageDataDriven -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>
