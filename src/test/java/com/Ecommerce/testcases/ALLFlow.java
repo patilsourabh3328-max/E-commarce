@@ -6,13 +6,13 @@ import org.testng.annotations.Test;
 import com.Ecommarce.PageObject.LoginPage;
 import com.Ecommarce.PageObject.indexPage;
 
-public class TC_VerifyLoginPage extends BaseClass {
 
+@Test
+public class ALLFlow extends BaseClass {
 	
-	@Test
-	public void Verifylogin() throws InterruptedException {
-		
-		driver.get(baseUrl);
+	
+	public void VerifypaymentFlow() throws InterruptedException {
+	    driver.get(baseUrl);
 		logger.info("url open");
 		
 		indexPage pg= new indexPage(driver);
@@ -36,13 +36,23 @@ public class TC_VerifyLoginPage extends BaseClass {
 		String userName = regUser.getUserName();
 
 		Assert.assertEquals("sourabh", userName);
-
 		logger.info("***************TestCase Verify Registration and Login ends*****************"); 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		p.ClickonSignOut();
 		logger.info("SignOut");
 	}
-	
-	
-	
 }

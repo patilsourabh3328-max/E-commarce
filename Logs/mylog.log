@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [INFO ] 2025-12-14 12:52:07.992 [main] Ecommarce - url open
 [INFO ] 2025-12-14 12:54:50.543 [main] Ecommarce - url open
 [INFO ] 2025-12-14 12:55:51.236 [main] Ecommarce - url open
@@ -158,3 +159,33 @@
 [INFO ] 2026-01-07 09:00:06.511 [main] Ecommarce - clicked on signinButton button
 [INFO ] 2026-01-07 09:00:06.622 [main] Ecommarce - enteedrEmailAddress
 [INFO ] 2026-01-07 09:00:06.686 [main] Ecommarce - enteedrEmailAddress
+=======
+[INFO ] 2026-01-13 09:27:07.957 [main] Ecommarce - url open1
+[INFO ] 2026-01-13 09:27:12.082 [main] Ecommarce - clicked on signinButton button
+[INFO ] 2026-01-13 09:27:12.214 [main] Ecommarce - enteedrEmailAddress
+[INFO ] 2026-01-13 09:27:12.319 [main] Ecommarce - enteedrPassword
+[INFO ] 2026-01-13 09:27:12.407 [main] Ecommarce - ClickOnloginButton
+[INFO ] 2026-01-13 09:27:15.100 [main] Ecommarce - VerifyLogin - Passed
+[INFO ] 2026-01-13 09:27:18.524 [main] Ecommarce - ***************TestCase Verify login ends*****************
+[INFO ] 2026-01-13 09:27:20.360 [main] Ecommarce - clicked on signinButton button
+[INFO ] 2026-01-13 09:27:20.408 [main] Ecommarce - enteedrEmailAddress
+[INFO ] 2026-01-13 09:27:20.445 [main] Ecommarce - enteedrPassword
+[INFO ] 2026-01-13 09:27:23.680 [main] Ecommarce - ClickOnloginButton
+[INFO ] 2026-01-13 09:27:24.007 [main] Ecommarce - VerifyLogin - Passed
+[INFO ] 2026-01-13 09:27:25.801 [main] Ecommarce - ***************TestCase Verify login ends*****************
+[INFO ] 2026-01-13 09:27:30.536 [main] Ecommarce - url open1
+[INFO ] 2026-01-13 09:27:33.733 [main] Ecommarce - url open
+[INFO ] 2026-01-13 09:27:35.754 [main] Ecommarce - clicked on signinButton button
+[INFO ] 2026-01-13 09:27:35.830 [main] Ecommarce - enteedrEmailAddress
+[INFO ] 2026-01-13 09:27:35.872 [main] Ecommarce - enteedr Password
+[INFO ] 2026-01-13 09:27:35.948 [main] Ecommarce - ClickOnloginButton
+[INFO ] 2026-01-13 09:27:38.088 [main] Ecommarce - ***************TestCase Verify Registration and Login ends*****************
+[INFO ] 2026-01-13 09:27:38.088 [main] Ecommarce - Click on ProductPage Button
+[INFO ] 2026-01-13 09:27:40.080 [main] Ecommarce - Clicked onProduct Button
+[INFO ] 2026-01-13 09:27:46.443 [main] Ecommarce - CartPage_Start
+[INFO ] 2026-01-13 09:27:48.322 [main] Ecommarce - CartPage_End
+[INFO ] 2026-01-13 09:27:48.322 [main] Ecommarce - CheckOutPage_Start
+[INFO ] 2026-01-13 09:27:50.818 [main] Ecommarce - CheckOutPage_End
+[INFO ] 2026-01-13 09:27:50.818 [main] Ecommarce - PaymentPage_Start
+[INFO ] 2026-01-13 09:27:54.989 [main] Ecommarce - PaymentPage_End
+>>>>>>> PP

@@ -6,13 +6,13 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="com.Ecommerce.testcases.TC_VerifyLoginPage">
+      <class name="com.Ecommerce.testcases.TC_VerifyE2EFlow">
         <methods>
           <include name="teardown"/>
           <include name="setup"/>
-          <include name="Verifylogin"/>
+          <include name="VerifyAllFlow"/>
         </methods>
-      </class> <!-- com.Ecommerce.testcases.TC_VerifyLoginPage -->
+      </class> <!-- com.Ecommerce.testcases.TC_VerifyE2EFlow -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

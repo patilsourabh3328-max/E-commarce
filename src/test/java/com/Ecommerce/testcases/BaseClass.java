@@ -52,11 +52,11 @@ public class BaseClass {
             throw new RuntimeException("Invalid browser in config file");
         }
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         logger = LogManager.getLogger("com.Ecommarce");
         
         driver.get(baseUrl);
-		logger.info("url open");
+		logger.info("url open1");
     }
 
     @AfterClass
@@ -64,6 +64,23 @@ public class BaseClass {
         driver.quit();
     }
     
+<<<<<<< HEAD
   
+=======
+    public void captureScreenShot(WebDriver driver,String testName) throws IOException
+	{
+		//step1: convert webdriver object to TakesScreenshot interface
+		TakesScreenshot screenshot = ((TakesScreenshot)driver);
+		
+		//step2: call getScreenshotAs method to create image file
+		
+		File src = screenshot.getScreenshotAs(OutputType.FILE);
+		
+		File dest = new File(System.getProperty("user.dir") + "//Screenshots//" + testName + ".png");
+	
+		//step3: copy image file to destination
+		FileUtils.copyFile(src, dest);
+	}
+>>>>>>> PP
     
 }
